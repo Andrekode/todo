@@ -1,12 +1,12 @@
-const todoListInput = document.querySelector("#todo-input");
-
 document.body.innerHTML += renderPage();
 
 // event listeners
 
 document.addEventListener("click", (e) => {
-  if (e.target.className === "btn") {
+  if (e.target.className === "add-btn") {
     document.querySelector(".todo-list").innerHTML += renderItem();
+  } else if (e.target.className === "sort-btn") {
+    document.querySelector(".todo-list").innerHTML = renderSortedHtml();
   }
 });
 
@@ -18,7 +18,7 @@ document.addEventListener("click", (e) => {
 
 document.addEventListener("click", (e) => {
   if (e.target.className === "sort-btn") {
-    sort();
+    sorting();
   }
 });
 
@@ -30,7 +30,7 @@ function renderPage() {
 <div class="app">
     <div class="input">
         <input id="todo-input" type="text"/>
-        <button class="btn">Add</button>
+        <button class="add-btn">Add</button>
         <button class="sort-btn">Sort</button>
     </div>
     <div class="todo-list"></div>
@@ -49,22 +49,24 @@ function renderItem() {
 </div>`;
 }
 
-function sort() {
+function sorting() {
   const items = document.querySelectorAll(".todo-item");
   const sortArray = [];
 
   items.forEach((item) => {
     sortArray.push(item.textContent);
   });
-  sortArray.sort((a, b) => a.localeCompare(b));
+  return sortArray.sort((a, b) => a.localeCompare(b));
+}
 
-  const sortedHtml = sortArray.map((item) => {
-    return `
+function renderSortedHtml() {
+  return sorting()
+    .map((item) => {
+      return `
       <div class="items">
         <p class="todo-item">${item}</p>
         <button class="delete-btn">Remove</button>
     </div>`;
-  });
-  return sortedHtml
-  
+    })
+    .join("");
 }

@@ -3,17 +3,22 @@ body {
   padding: 0;
 }
 
+p {
+  font-size: 2rem;
+}
+
 .container {
   display: flex;
   margin-top: 2em;
-
+  justify-content: center;
+  align-items: center;
   width: 98%;
 }
 
 .app {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 70%;
 }
 
 .todo-list {
@@ -28,3 +33,6 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
+
+
